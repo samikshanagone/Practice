@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.orosoft.grpc";
+service CachingService {
+	rpc getUser (UserRequest) returns (UserData);
+	rpc storeUser (UserData) returns (StoreUserResponse);
+	rpc removeUser (RemoveUserRequest) returns (RemoveUserResponse);
+	rpc storeOTP (StoreOTP) returns (StoreOTPResponse);
+	rpc validateOTP (ValidateOTPRequest) returns (ValidateOTPResponse);
+	rpc removeOTP (RemoveOTPRequest) returns (RemoveOTPResponse);
+	rpc GetLoginAttempts(GetLoginAttemptsRequest) returns (GetLoginAttemptsResponse);
+}
+
+message GetLoginAttemptsRequest {
+  string user_id = 1;
+}
+
+message GetLoginAttemptsResponse {
+  int32 login_attempts = 1;
+}
+
+message StoreOTP{
+	string userId = 1;
+	string OTP = 2;
+}
+
+message StoreOTPResponse {
+	bool success = 1;
+}
+
+message ValidateOTPRequest{
+	string userId = 1;
+	string otp = 2;
+	int32 maxTry = 3;
+}
+
+message ValidateOTPResponse{
+	bool optMatched = 1;
+	bool MaxTryReach = 2;
+	bool userIdValid = 3;
+}
+
+message UserRequest {
+	string userId = 1;
+}
+
+message UserData {
+	string userId = 1;
+	string name = 2;
+	string email = 3;
+	string contact = 4;
+	string dob = 5;
+	string password = 6;
+}
+
+message StoreUserResponse {
+	bool success = 1;
+}
+
+message RemoveUserRequest {
+	string userId = 1;
+}
+
+message RemoveUserResponse {
+	bool success = 1;
+}
+
+message RemoveOTPRequest {
+	string userId = 1;
+}
+
+message RemoveOTPResponse {
+	bool success = 1;
+}

@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.orosoft.grpc";
+
+service SessionService {
+  rpc saveSession (SessionData) returns (StoreUserResponse);
+  rpc logoutSession(logoutSessionRequest) returns (logoutSessionResponse);
+  rpc isLoggedIn(isLoggedInRequest) returns (isLoggedInResponse);
+  rpc getSession(SessionRequest) returns (SessionData);
+
+}
+
+message SessionRequest {
+	string userId = 1;
+}
+
+message StoreUserResponse {
+	bool success = 1;
+}
+
+message SessionData {
+
+  string sessionId =1;
+  string userId = 2;
+  string token = 3;
+  string deviceString = 4;
+
+}
+
+message SessionResponse {
+  string sessionId = 1;
+}
+
+message logoutSessionRequest {
+  string userId = 1;
+}
+message logoutSessionResponse {
+  bool isSuccess = 1;
+}
+message isLoggedInRequest {
+  string userId = 1;
+  string deviceString = 2;
+}
+
+message isLoggedInResponse {
+  bool loggedIn = 1;
+  string sessionId = 2;
+}
+
+
+
+
+

@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.orosoft.grpc";
+service CachingService {
+	rpc getUser (UserRequest) returns (UserData);
+	rpc storeUser (UserData) returns (StoreUserResponse);
+	rpc removeUser (RemoveUserRequest) returns (RemoveUserResponse);
+}
+
+message UserRequest {
+	string userId = 1;
+}
+
+message UserData {
+	string userId = 1;
+	string name = 2;
+	string email = 3;
+	string contact = 4;
+	string dob = 5;
+	string password = 6;
+}
+
+message StoreUserResponse {
+	bool success = 1;
+}
+
+message RemoveUserRequest {
+	string userId = 1;
+}
+
+message RemoveUserResponse {
+	bool success = 1;
+}

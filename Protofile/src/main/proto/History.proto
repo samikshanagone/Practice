@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.orosoft.grpc.history";
+service HistoryCachingService {
+	rpc getProductsHistory (ProductsHistoryDataRequest) returns (ProductsHistoryData);
+	rpc storeProductsHistory (ProductsHistoryData) returns (StoreProductsResponse);
+	rpc removeProductsHistory (RemoveProductsHistoryData) returns (RemoveProductsResponse);
+    rpc getCategoriesHistory (CategoriesHistoryDataRequest) returns (CategoriesHistoryData);
+	rpc storeCategoriesHistory (CategoriesHistoryData) returns (StoreCategoriesResponse);
+	rpc removeCategoriesHistory (RemoveCategoriesHistoryData) returns (RemoveCategoriesResponse);
+}
+
+message ProductsHistoryDataRequest {
+	string userId = 1;
+}
+
+message ProductsHistoryData {
+	string userId = 1;
+	string productId = 2;
+	string categoryId = 3;
+	string imagePath = 4;
+	string productionDescription = 5;
+	string productName = 6;
+	string productPrice = 7;
+	int32 viewCount = 8;
+}
+
+message StoreProductsResponse {
+	bool success = 1;
+}
+
+message RemoveProductsHistoryData{
+	string userId = 1;
+}
+
+message RemoveProductsResponse {
+	bool success = 1;
+}
+
+message CategoriesHistoryDataRequest {
+	string userId = 1;
+}
+
+message CategoriesHistoryData {
+	string userId = 1;
+	string categoryId = 2;
+        string categoryName = 3;
+	string imagePath = 4;
+}
+
+message StoreCategoriesResponse {
+	bool success = 1;
+}
+
+message RemoveCategoriesHistoryData{
+	string userId = 1;
+}
+
+message RemoveCategoriesResponse {
+	bool success = 1;
+}
